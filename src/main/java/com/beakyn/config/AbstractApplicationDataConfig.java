@@ -1,7 +1,7 @@
 package com.beakyn.config;
 
 import static java.lang.String.format;
-import static org.springframework.util.StringUtils.isEmpty;
+//import static org.springframework.util.StringUtils.isEmpty;
 
 import java.util.List;
 
@@ -47,10 +47,10 @@ public abstract class AbstractApplicationDataConfig extends AbstractMongoConfigu
         String hostProp = getMongoSystemProperties().getProperty("mongo.host");
         String portProp = getMongoSystemProperties().getProperty("mongo.port");
 
-        if (isEmpty(hostProp)) {
+        if (hostProp == null || hostProp == "") {
             throw new IllegalStateException("No mongo.host value was specified.");
         }
-        if (isEmpty(portProp)) {
+        if (portProp  == null || hostProp == "") {
             throw new IllegalStateException("No mongo.port value was specified.");
         }
         int port = Integer.valueOf(portProp);
@@ -66,7 +66,7 @@ public abstract class AbstractApplicationDataConfig extends AbstractMongoConfigu
         final String username = getMongoSystemProperties().getProperty("mongo.user");
         final String password = getMongoSystemProperties().getProperty("mongo.password");
         UserCredentials userCredentials = UserCredentials.NO_CREDENTIALS;
-        if (!isEmpty(username) || !isEmpty(password)) {
+        if (username !=null || password!= null) {
             userCredentials = new UserCredentials(username, password);
         }
         return userCredentials;
