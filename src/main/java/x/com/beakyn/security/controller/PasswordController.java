@@ -13,15 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.beakyn.security.controller;
+package x.com.beakyn.security.controller;
 
-import com.stormpath.sdk.account.Account;
-import com.stormpath.sdk.resource.ResourceException;
-import com.beakyn.security.model.User;
-import com.beakyn.security.model.dao.CustomerDao;
-import com.beakyn.security.model.sdk.StormpathService;
-import com.beakyn.security.validator.ChangePasswordValidator;
-import com.beakyn.security.validator.ResetPasswordValidator;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Propagation;
@@ -34,7 +29,14 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import javax.servlet.http.HttpSession;
+import x.com.beakyn.security.model.sdk.StormpathService;
+import x.com.beakyn.security.validator.ChangePasswordValidator;
+import x.com.beakyn.security.validator.ResetPasswordValidator;
+
+import com.beakyn.dao.UserDAO;
+import com.beakyn.model.User;
+import com.stormpath.sdk.account.Account;
+import com.stormpath.sdk.resource.ResourceException;
 
 /**
  * @author Elder Crisostomo
@@ -48,7 +50,7 @@ public class PasswordController {
     ResetPasswordValidator resetPasswordValidator;
 
     @Autowired
-    CustomerDao customerDao;
+    private UserDAO userDAO;
 
     @Autowired
     StormpathService stormpath;

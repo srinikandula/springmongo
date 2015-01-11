@@ -6,15 +6,11 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.stereotype.Repository;
 
-import com.beakyn.model.User;
+import com.beakyn.model.BusImages;
 
 @Repository
-public interface UserDAO extends PagingAndSortingRepository<User, String> {
+public interface BusinessImagesDAO extends PagingAndSortingRepository<BusImages, String> {
 
-    User findOneByEmail(String email);
-    User findOneByUserName(String email);
-
-    Page<User> findAll(Pageable pageable);
-
-
+	BusImages findOneByBusinessId(String email);
+    Page<BusImages> findAll(Pageable pageable);
 }

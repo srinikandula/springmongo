@@ -1,5 +1,7 @@
 package test.com.beakyn;
 
+import static org.junit.Assert.assertEquals;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -9,9 +11,6 @@ import com.beakyn.config.AbstractDAOIntegrationTest;
 import com.beakyn.dao.UserDAO;
 import com.beakyn.model.User;
 import com.google.common.collect.Lists;
-
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
 
 public class UserDAOIntegrationTest extends AbstractDAOIntegrationTest {
 

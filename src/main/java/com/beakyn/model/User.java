@@ -13,6 +13,8 @@ import org.jsondoc.core.annotation.ApiObjectField;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Field;
 
+import com.stormpath.sdk.account.Account;
+
 
 @ToString
 @EqualsAndHashCode(callSuper = false, of = { "email" })
@@ -44,17 +46,25 @@ public class User extends AbstractDocument implements AttributesDocument {
     public static final String KEY_FAVORITES = "fav";
     public static final String KEY_AGGREGATE_PERMISSIONS = "agp";
     public static final String KEY_UDID = "udid";
-
+    private static final String KEY_GROUP = "group";
+    
     public static final String KEY_ATTR_ACTIVE_REC_SCREEN_STYLE_ID = "activeRSStyle";
 
     private static final int RANDOM_PASSWORD_LENGTH = 64;
     private static final int MAX_SESSION_TOKENS = 10;
+	
 
     @Getter
     @Setter
     @ApiObjectField(description = "First Name")
     private String firstName;
 
+    @Getter
+    @Setter
+    @ApiObjectField(description = "Username i.e. unique identifier for the user")
+    private String userName;
+
+    
     @Getter
     @Setter
     @ApiObjectField(description = "Last Name")
@@ -139,6 +149,38 @@ public class User extends AbstractDocument implements AttributesDocument {
     @Setter
     @Field(KEY_PHONE1)
     private String phone1;
+    
+    @Getter
+    @Setter
+    @Field(KEY_GROUP)
+    private String groupUrl;
+
+    @Getter
+    @Setter
+    private Account account;
+
+    @Getter
+    @Setter
+    private String sptoken;
+
+    
+    @Getter
+    @Setter
+    private String confirmPassword;
+    
+    
+    
+	public User(Account account2) {
+		// TODO Auto-generated constructor stub
+	}
+
+
+
+	public User() {
+		// TODO Auto-generated constructor stub
+	}
+
+
 
 	@Override
 	public boolean containsKey(String attributeName) {
@@ -146,5 +188,8 @@ public class User extends AbstractDocument implements AttributesDocument {
 		return false;
 	}
 
+
+
+	
 	
 }

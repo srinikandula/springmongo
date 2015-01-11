@@ -13,18 +13,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.beakyn.security.controller;
+package x.com.beakyn.security.controller;
 
-import com.stormpath.sdk.account.Account;
-import com.stormpath.sdk.authc.AuthenticationRequest;
-import com.stormpath.sdk.authc.AuthenticationResult;
-import com.stormpath.sdk.authc.UsernamePasswordRequest;
-import com.stormpath.sdk.resource.ResourceException;
-import com.beakyn.security.model.User;
-import com.beakyn.security.model.dao.CustomerDao;
-import com.beakyn.security.model.sdk.StormpathService;
-import com.beakyn.security.util.PermissionUtil;
-import com.beakyn.security.validator.LoginValidator;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -37,7 +28,17 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.support.SessionStatus;
 
-import javax.servlet.http.HttpSession;
+import x.com.beakyn.security.model.sdk.StormpathService;
+import x.com.beakyn.security.util.PermissionUtil;
+import x.com.beakyn.security.validator.LoginValidator;
+
+import com.beakyn.dao.UserDAO;
+import com.beakyn.model.User;
+import com.stormpath.sdk.account.Account;
+import com.stormpath.sdk.authc.AuthenticationRequest;
+import com.stormpath.sdk.authc.AuthenticationResult;
+import com.stormpath.sdk.authc.UsernamePasswordRequest;
+import com.stormpath.sdk.resource.ResourceException;
 
 /**
  * @author Elder Crisostomo
@@ -50,7 +51,7 @@ public class LoginController {
     private LoginValidator loginValidator;
 
     @Autowired
-    CustomerDao customerDao;
+    private UserDAO userDAO;
 
     @Autowired
     StormpathService stormpath;
@@ -94,9 +95,9 @@ public class LoginController {
                 // that has already been authenticated in the previous call to the Stormpath API.
                 // This is because the application uses an in-memory database (HSQLDB)
                 // that only persists while the application is up.
-                User dbCustomer = customerDao.getCustomerByUserName(customer.getUserName());
+                User dbCustomer = userDAO.findOneByUserName(customer.getUserName());
                 if (dbCustomer == null) {
-                    customerDao.saveCustomer(user);
+                    userDAO.save(user);
                 }
 
                 if (dbCustomer != null) {

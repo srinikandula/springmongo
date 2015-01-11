@@ -13,27 +13,31 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.beakyn.security.validator;
+package x.com.beakyn.security.validator;
 
-import com.beakyn.security.model.User;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
 
+import com.beakyn.model.User;
+
 /**
  * @author Elder Crisostomo
  */
 @Component
-public class ResetPasswordValidator implements Validator {
+public class LoginValidator implements Validator {
+
     @Override
     public boolean supports(Class<?> clazz) {
         return User.class.isAssignableFrom(clazz);
     }
 
     @Override
-    public void validate(Object o, Errors errors) {
+    public void validate(Object target, Errors errors) {
 
-        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "email", "reset.password.required.email", "Field email is required");
+        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "userName", "login.required.userName", "Field name is required");
+
+        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "password", "login.required.password", "Field password is required");
     }
 }

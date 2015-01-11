@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.beakyn.security.model.sdk;
+package x.com.beakyn.security.model.sdk;
  
 import com.stormpath.sdk.application.Application;
 import com.stormpath.sdk.client.Client;

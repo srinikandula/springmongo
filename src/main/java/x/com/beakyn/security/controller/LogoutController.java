@@ -13,18 +13,24 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.beakyn.security.model.dao;
+package x.com.beakyn.security.controller;
 
-import com.beakyn.security.model.User;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+
+import javax.servlet.http.HttpSession;
 
 /**
  * @author Elder Crisostomo
  */
-public interface CustomerDao {
+@Controller
+@RequestMapping("/logout")
+public class LogoutController {
 
-    User getCustomerByUserName(String userName) throws Exception;
-
-    User saveCustomer(User customer) throws Exception;
-
-    User updateCustomer(User customer) throws Exception;
+    @RequestMapping(method = RequestMethod.GET)
+    public String logout(HttpSession session) {
+        session.invalidate();
+        return "logout";
+    }
 }

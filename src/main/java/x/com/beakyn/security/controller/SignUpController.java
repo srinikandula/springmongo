@@ -13,15 +13,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.beakyn.security.controller;
+package x.com.beakyn.security.controller;
 
-import com.stormpath.sdk.account.Account;
-import com.stormpath.sdk.directory.Directory;
-import com.stormpath.sdk.group.Group;
-import com.beakyn.security.model.User;
-import com.beakyn.security.model.dao.CustomerDao;
-import com.beakyn.security.model.sdk.StormpathService;
-import com.beakyn.security.validator.SignUpValidator;
+import java.util.HashMap;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
@@ -35,8 +31,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.support.SessionStatus;
 
-import java.util.HashMap;
-import java.util.Map;
+import x.com.beakyn.security.model.sdk.StormpathService;
+import x.com.beakyn.security.validator.SignUpValidator;
+
+import com.beakyn.dao.UserDAO;
+import com.beakyn.model.User;
+import com.stormpath.sdk.account.Account;
+import com.stormpath.sdk.directory.Directory;
+import com.stormpath.sdk.group.Group;
 
 /**
  * @author Elder Crisostomo
@@ -47,7 +49,7 @@ import java.util.Map;
 public class SignUpController {
 
     @Autowired
-    CustomerDao customerDao;
+    private UserDAO userDAO;
 
     SignUpValidator singUpValidator;
 
@@ -106,7 +108,7 @@ public class SignUpController {
             }
 
             user.setUserName(userName);
-            customerDao.saveCustomer(user);
+            userDAO.save(user);
 
             status.setComplete();
 

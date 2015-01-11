@@ -13,13 +13,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.beakyn.security.validator;
+package x.com.beakyn.security.validator;
 
-import com.beakyn.security.model.User;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
+
+import com.beakyn.model.User;
 
 /**
  * @author Elder Crisostomo

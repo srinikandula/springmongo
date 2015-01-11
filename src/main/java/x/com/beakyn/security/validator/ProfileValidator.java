@@ -13,19 +13,20 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.beakyn.security.validator;
+package x.com.beakyn.security.validator;
 
-import com.beakyn.security.model.User;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
 
+import com.beakyn.model.User;
+
 /**
  * @author Elder Crisostomo
  */
 @Component
-public class LoginValidator implements Validator {
+public class ProfileValidator implements Validator {
 
     @Override
     public boolean supports(Class<?> clazz) {
@@ -33,10 +34,14 @@ public class LoginValidator implements Validator {
     }
 
     @Override
-    public void validate(Object target, Errors errors) {
+    public void validate(Object o, Errors errors) {
 
-        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "userName", "login.required.userName", "Field name is required");
+        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "firstName", "profile.required.firstName", "Field first name is required");
 
-        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "password", "login.required.password", "Field password is required");
+        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "lastName", "profile.required.lastName", "Field last name is required");
+
+        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "email", "profile.required.email", "Field email is required");
+
+
     }
 }

@@ -13,11 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.beakyn.security.controller;
+package x.com.beakyn.security.controller;
 
-import com.beakyn.security.model.User;
-import com.beakyn.security.model.dao.CustomerDao;
-import com.beakyn.security.model.sdk.StormpathService;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Propagation;
@@ -27,25 +26,23 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.support.SessionStatus;
 
-import javax.servlet.http.HttpSession;
-import java.util.Collections;
-import java.util.List;
+import x.com.beakyn.security.model.sdk.StormpathService;
 
-/**
- * @author Elder Crisostomo
- */
+import com.beakyn.dao.UserDAO;
+import com.beakyn.model.User;
+
+
 @Controller
 @Transactional(propagation = Propagation.REQUIRES_NEW)
 public class HomeController {
 
     @Autowired
-    CustomerDao customerDao;
+    private UserDAO customerDao;
 
     @Autowired
-    StormpathService stormpath;
+    private StormpathService stormpath;
 
 
     public HomeController() {
@@ -63,7 +60,7 @@ public class HomeController {
 
         if (!result.hasErrors()) {
 
-            User persistCustomer = new User(sessionUser);
+            //User persistCustomer = new User(sessionUser);
 
 
           

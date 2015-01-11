@@ -13,13 +13,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.beakyn.security.util;
+package x.com.beakyn.security.util;
 
-import com.beakyn.security.model.User;
-import com.beakyn.security.model.sdk.StormpathService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
+
+import x.com.beakyn.security.model.sdk.StormpathService;
+
+import com.beakyn.model.User;
 
 /**
  * @author Elder Crisostomo
