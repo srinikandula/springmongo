@@ -2,6 +2,7 @@ package com.beakyn.config;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.config.MethodInvokingFactoryBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -12,6 +13,7 @@ import org.springframework.data.mongodb.repository.config.EnableMongoRepositorie
 
 import com.beakyn.config.AbstractApplicationDataConfig;
 import com.beakyn.config.MongoSystemProperties;
+import com.stormpath.sdk.client.ClientBuilder;
 
 @Configuration
 @Profile("test")
@@ -34,5 +36,19 @@ public class ApplicationDataTestConfig extends AbstractApplicationDataConfig {
     @Override
     String getHomeDirPropertiesFilename() {
         return HOME_DIR_PROPS_FILENAME;
+    }
+    @Bean
+    public ClientBuilder getStormpathClientBuilder(){
+    	ClientBuilder clientBuilder = new ClientBuilder();
+    	clientBuilder.setApiKeyFileLocation("C:/Users/Simha/.stormpath/apiKey.properties");
+    	return clientBuilder;
+    }
+    
+    @Bean(name ="stormpathClient")
+    public MethodInvokingFactoryBean getStormpathClient(){
+    	MethodInvokingFactoryBean invokeBean = new MethodInvokingFactoryBean();
+    	invokeBean.setTargetObject(getStormpathClientBuilder());
+    	invokeBean.setTargetMethod("build");
+    	return invokeBean;
     }
 }

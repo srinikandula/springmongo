@@ -22,5 +22,4 @@ public class CoreAppConfig {
         return new SystemProperties(env);
     }
     
-    
 }
